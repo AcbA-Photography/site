@@ -1,21 +1,118 @@
-/* RESET */
-* {
+/* ═══════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   Centralizes all colors, fonts, and spacing in one place.
+   Change a variable here and it updates everywhere.
+═══════════════════════════════════════════════════════════ */
+:root {
+  --bg: #0a0a0a;
+  /* Near-black base background */
+  --bg-alt: #111111;
+  /* Slightly lighter for alternating sections */
+  --text: #f0ece4;
+  /* Warm off-white — softer than pure #fff */
+  --text-muted: rgba(240, 236, 228, 0.55);
+  /* Dimmed text for secondary info */
+  --accent: #c9a96e;
+  /* Warm gold — primary accent color */
+  --accent-dim: rgba(201, 169, 110, 0.15);
+  /* Subtle gold tint for backgrounds */
+  --border: rgba(240, 236, 228, 0.1);
+  /* Low-opacity border */
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  /* Headings, quotes, numbers */
+  --font-body: 'Jost', sans-serif;
+  /* Body text, labels, nav */
+
+  --section-pad: 100px 10%;
+  /* Consistent section padding */
+  --radius: 4px;
+  /* Subtle rounding on cards/images */
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: #0b0b0b;
-  color: #ffffff;
-  overflow-x: hidden;
+html {
+  scroll-behavior: smooth;
+  /* Smooth anchor scrolling (if nav links added later) */
 }
 
-/* HERO */
+
+/* ═══════════════════════════════════════════════════════════
+   BODY
+   Cormorant is the display font; Jost is the body default.
+   overflow-x: hidden prevents any accidental horizontal scroll.
+═══════════════════════════════════════════════════════════ */
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   SHARED: SECTION LABELS
+   Small uppercase spaced label above headings.
+   Used consistently across all major sections.
+   display: block makes it sit on its own line above the h2.
+═══════════════════════════════════════════════════════════ */
+.section-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+/* H2 shared style — all section headings */
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  /* fluid size: scales with viewport */
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+
+/* Subtitle text under portfolio heading */
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 50px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   1. HERO
+   Full viewport, background image centered + covered.
+   ::after creates the semi-transparent overlay.
+   .hero-content sits above it via z-index: 2.
+
+   Animation: hero-content fades in + rises on page load.
+   .hero-fade is a gradient div at the bottom edge that
+   blends the hero image into the dark section below.
+═══════════════════════════════════════════════════════════ */
 .hero {
   height: 100vh;
-  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+  min-height: 600px;
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,104 +124,586 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.52);
+  /* Slightly stronger than original 0.5 */
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
+  animation: heroReveal 1.4s ease forwards;
+  /* Fade + rise on load */
+}
+
+/* Fade-up entrance animation */
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-micro-top {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  opacity: 0.85;
 }
 
 .hero h1 {
-  font-size: 3rem;
-  letter-spacing: 2px;
-  font-family: serif;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  /* Scales fluidly with viewport width */
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
 }
 
-.hero p {
-  margin-top: 10px;
-  font-size: 1.2rem;
+.hero-tagline {
+  margin-top: 18px;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-family: var(--font-display);
+  font-style: italic;
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+}
+
+.hero-micro {
+  margin-top: 14px;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Gradient fade at the base of the hero image */
+.hero-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  z-index: 3;
+  pointer-events: none;
+  /* Doesn't block clicks below it */
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   2. INTRO STRIP
+   3-column flex layout with vertical dividers.
+   Alternating background color (--bg-alt) differentiates it.
+   The .intro-divider is a thin 1px vertical line.
+   Collapses to single column on mobile (dividers hidden).
+═══════════════════════════════════════════════════════════ */
+.intro-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 60px 10%;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.intro-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px 40px;
+}
+
+.intro-icon {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 14px;
   opacity: 0.8;
 }
 
-/* SECTIONS */
-section {
-  padding: 80px 10%;
+.intro-item h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
 }
 
-/* ABOUT */
+.intro-item p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* Thin vertical separator between intro items */
+.intro-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   3. ABOUT
+   Centered layout with max-width for comfortable reading.
+   text-align: center + margin: 0 auto centers the block.
+═══════════════════════════════════════════════════════════ */
 .about {
-  max-width: 800px;
-  margin: auto;
+  padding: var(--section-pad);
   text-align: center;
-  line-height: 1.6;
-  opacity: 0.9;
 }
 
-/* PORTFOLIO (MASONRY) */
+.about h2,
+.about .section-label {
+  text-align: center;
+}
+
+.about p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   4. FEATURED WORK
+   Full-width image with absolute-positioned text overlay.
+   The gradient on .featured-overlay goes from transparent
+   at top to dark at bottom — text sits over the dark portion.
+   The label above the image uses a centered block display.
+═══════════════════════════════════════════════════════════ */
+.featured {
+  padding: 0 0 80px;
+  text-align: center;
+}
+
+.featured-label {
+  margin-bottom: 24px;
+}
+
+.featured-image-wrap {
+  position: relative;
+  width: 100%;
+  max-height: 600px;
+  overflow: hidden;
+}
+
+.featured-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Fills container without distorting */
+  object-position: center;
+  display: block;
+  filter: brightness(0.85);
+  /* Slightly darken for overlay readability */
+}
+
+.featured-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 60px 10% 40px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  text-align: center;
+}
+
+.featured-overlay blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   5. PORTFOLIO
+   Heading block is centered and padded.
+   The masonry grid uses column-count (same as original).
+   Hover: scale + opacity fade, same as original.
+   Responsive: 3 → 2 → 1 column at breakpoints.
+═══════════════════════════════════════════════════════════ */
+.portfolio-section {
+  padding: var(--section-pad);
+  text-align: center;
+}
+
 .portfolio {
   column-count: 3;
-  column-gap: 15px;
+  column-gap: 12px;
+  text-align: left;
+  /* Reset text-align so images align properly in columns */
+  margin-top: 10px;
 }
 
 .portfolio img {
   width: 100%;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  margin-bottom: 12px;
+  border-radius: var(--radius);
+  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
   cursor: pointer;
+  display: block;
 }
 
 .portfolio img:hover {
-  transform: scale(1.05);
-  opacity: 0.85;
+  transform: scale(1.03);
+  opacity: 0.82;
+  filter: brightness(1.05);
+  /* Slight brighten on hover adds interest */
 }
 
-/* SERVICES */
+
+/* ═══════════════════════════════════════════════════════════
+   6. SERVICES
+   Alternating background to visually separate from portfolio.
+   CSS Grid with auto-fill: creates as many columns as fit
+   at min 220px each — 4 on desktop, 2 on tablet, 1 on mobile.
+   Cards have a subtle border + hover lift effect.
+═══════════════════════════════════════════════════════════ */
 .services {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
+  padding: var(--section-pad);
+  background: var(--bg-alt);
   text-align: center;
 }
 
-.service {
-  opacity: 0.8;
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 50px;
+  text-align: left;
 }
 
-.service h3 {
+.service-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  /* Lift on hover */
+  background: var(--accent-dim);
+}
+
+.service-icon {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
   margin-bottom: 10px;
-  font-family: serif;
+  letter-spacing: 0.03em;
 }
 
-/* CONTACT */
-.contact {
+.service-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   7. PROCESS
+   3 steps + 2 connector lines in a flex row.
+   .process-step uses flex: 1 so all steps share width equally.
+   .process-connector is a thin horizontal line between steps.
+   Step numbers are large display numerals — visually anchor each step.
+   On mobile: connector lines hidden, steps stack vertically.
+═══════════════════════════════════════════════════════════ */
+.process {
+  padding: var(--section-pad);
   text-align: center;
-  line-height: 2;
-  opacity: 0.9;
 }
 
-/* FOOTER */
+.process-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 60px;
+}
+
+.process-step {
+  flex: 1;
+  text-align: center;
+  padding: 0 30px;
+}
+
+/* Horizontal thin line between steps */
+.process-connector {
+  flex-shrink: 0;
+  width: 60px;
+  height: 1px;
+  background: var(--border);
+  margin-top: 32px;
+  /* Aligns vertically with the step number center */
+}
+
+.step-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--accent);
+  opacity: 0.5;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.process-step h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+
+.process-step p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   8. TESTIMONIALS
+   Alternating background section.
+   3-column grid of quote cards.
+   blockquote::before adds a large decorative " character
+   in the accent color above the text — no extra HTML needed.
+   <cite> is italicized and dimmed below the quote.
+═══════════════════════════════════════════════════════════ */
+.testimonials {
+  padding: var(--section-pad);
+  background: var(--bg-alt);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 50px;
+  text-align: left;
+}
+
+.testimonial {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 28px 28px;
+  position: relative;
+}
+
+/* Large decorative quotation mark */
+.testimonial blockquote::before {
+  content: '"';
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--accent);
+  opacity: 0.4;
+  line-height: 0;
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 12px;
+}
+
+.testimonial blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text);
+  font-weight: 300;
+}
+
+.testimonial cite {
+  display: block;
+  margin-top: 20px;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   9. CONTACT
+   Centered section with a structured list of contact items.
+   Each list item has a label (Email / Phone / Instagram) on the left
+   and an <a> link on the right.
+   list-style: none removes bullet points.
+   <a> tags inherit the accent color and animate on hover.
+═══════════════════════════════════════════════════════════ */
+.contact {
+  padding: var(--section-pad);
+  text-align: center;
+}
+
+.contact-intro {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 40px;
+  letter-spacing: 0.04em;
+}
+
+.contact-list {
+  list-style: none;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.contact-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  min-width: 80px;
+  /* Aligns all labels to same column width */
+}
+
+.contact-list a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.contact-list a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  /* Subtle underline only on hover */
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   10. FOOTER
+   Minimal, dimmed. Two-line layout.
+   .footer-sub is even more muted than the main line.
+═══════════════════════════════════════════════════════════ */
 footer {
   text-align: center;
-  padding: 30px;
-  opacity: 0.5;
+  padding: 40px 10%;
+  border-top: 1px solid var(--border);
+  opacity: 0.4;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
 }
 
-/* RESPONSIVE */
+.footer-sub {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  opacity: 0.7;
+  /* Dimmer than the copyright line */
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — 900px (Tablet)
+   Portfolio: 3 → 2 columns
+   Services grid: remains auto-fill but min shrinks
+   Process steps: stack vertically, connectors hidden
+   Testimonials: auto-fill handles it naturally
+   Intro strip: stacks vertically, dividers hidden
+═══════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
   .portfolio {
     column-count: 2;
   }
 
-  .services {
+  .process-steps {
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .process-connector {
+    display: none;
+    /* Horizontal connectors don't make sense when stacked */
+  }
+
+  .process-step {
+    padding: 0;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .intro-strip {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .intro-divider {
+    width: 60px;
+    height: 1px;
+    /* Horizontal divider when stacked */
   }
 }
 
-@media (max-width: 500px) {
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — 600px (Mobile)
+   Portfolio: 2 → 1 column
+   Section padding tightened
+   Hero h1 uses clamp so it already scales — no override needed
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  :root {
+    --section-pad: 70px 6%;
+    /* Tighter horizontal padding on small screens */
+  }
+
   .portfolio {
     column-count: 1;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    /* Full width cards on mobile */
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .contact-label {
+    min-width: unset;
   }
 }

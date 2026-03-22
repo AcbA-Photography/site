@@ -6,70 +6,266 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AcbA Photography</title>
 
-  <!-- LINK CSS -->
+  <!--
+    FONTS:
+    - Cormorant Garamond: Elegant serif for headings/display text
+    - Jost: Clean, geometric sans-serif for body text
+    Both imported from Google Fonts.
+  -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- HERO -->
+  <!-- ═══════════════════════════════════════════
+       1. HERO SECTION
+       Full-viewport with background image + dark overlay.
+       Three lines: title, tagline, micro-line.
+       Fade-in animation via CSS (.hero-content uses animation).
+  ═══════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-content">
+      <p class="hero-micro-top">Est. 2026</p>
       <h1>AcbA Photography</h1>
-      <p>Moments, perfectly framed.</p>
+      <p class="hero-tagline">Moments, perfectly framed.</p>
+      <p class="hero-micro">Capturing stories through light, lens, and emotion.</p>
+    </div>
+    <!-- Gradient fade at the bottom blends hero into the next section -->
+    <div class="hero-fade"></div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       2. QUICK INTRO STRIP (NEW)
+       3-column credibility bar immediately after hero.
+       Replaces long about text with scannable visual anchors.
+       Dividers between columns for structure.
+       Icons: Unicode geometric shapes, no icon library needed.
+  ═══════════════════════════════════════════ -->
+  <section class="intro-strip">
+    <div class="intro-item">
+      <span class="intro-icon">◈</span>
+      <h4>Creative Direction</h4>
+      <p>Guided shoots with artistic vision</p>
+    </div>
+    <div class="intro-divider"></div>
+    <div class="intro-item">
+      <span class="intro-icon">◎</span>
+      <h4>High-Quality Output</h4>
+      <p>Sharp, professional-grade images</p>
+    </div>
+    <div class="intro-divider"></div>
+    <div class="intro-item">
+      <span class="intro-icon">◇</span>
+      <h4>Timeless Editing</h4>
+      <p>Clean tones that never go out of style</p>
     </div>
   </section>
 
-  <!-- ABOUT -->
+
+  <!-- ═══════════════════════════════════════════
+       3. ABOUT SECTION
+       Refined from original: now has a small label above
+       the heading for visual hierarchy.
+       Constrained to max-width 700px for comfortable line length.
+  ═══════════════════════════════════════════ -->
   <section class="about">
+    <span class="section-label">Who We Are</span>
+    <h2>About Us</h2>
     <p>
-      We specialize in capturing timeless moments through refined photography.
-      Every frame is crafted with intention, emotion, and detail.
-      From intimate portraits to grand celebrations, we preserve what matters most.
+      AcbA Photography is dedicated to capturing meaningful moments with precision and creativity.
+      We blend technical expertise with artistic vision to produce images that feel natural and timeless.
+      Every project is approached with attention to detail and a passion for storytelling.
+      Our goal is simple — to turn moments into lasting visual memories.
     </p>
   </section>
 
-  <!-- PORTFOLIO -->
-  <section>
+
+  <!-- ═══════════════════════════════════════════
+       4. FEATURED WORK (NEW)
+       Single full-width image with quote overlay.
+       The overlay uses a gradient from transparent → black
+       at the bottom to keep text readable against any image.
+       Acts as a visual bridge between About and Portfolio.
+  ═══════════════════════════════════════════ -->
+  <section class="featured">
+    <span class="section-label featured-label">Featured Work</span>
+    <div class="featured-image-wrap">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600" alt="Featured wedding photograph">
+      <div class="featured-overlay">
+        <blockquote>"Every frame tells a story worth remembering."</blockquote>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       5. PORTFOLIO SECTION
+       Same masonry grid as original, now with a heading block above.
+       Duplicate image slot 4 replaced with a unique Unsplash URL.
+       All images now have descriptive alt text.
+       ?w=800 on each URL tells Unsplash to serve a resized image
+       rather than the full-resolution original — faster loads.
+  ═══════════════════════════════════════════ -->
+  <section class="portfolio-section">
+    <span class="section-label">Our Work</span>
+    <h2>Portfolio</h2>
+    <p class="section-subtitle">A collection of captured moments</p>
+
     <div class="portfolio">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
-      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="Image">
-      <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308">
-      <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d">
-      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
-      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9">
-      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800" alt="Wedding ceremony aisle">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800" alt="Couple portrait outdoors">
+      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=800" alt="Portrait close-up">
+      <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800" alt="Wedding reception dancing">
+      <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800" alt="Scenic landscape photo">
+      <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=800" alt="Man portrait">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800" alt="Woman portrait smiling">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800" alt="Woman lifestyle photo">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800" alt="Woman outdoor portrait">
     </div>
   </section>
 
-  <!-- SERVICES -->
+
+  <!-- ═══════════════════════════════════════════
+       6. SERVICES SECTION (Upgraded)
+       4 cards instead of 3, now with fuller descriptions.
+       Uses CSS Grid (auto-fill) so the 4th card (Commercial)
+       flows naturally without extra layout work.
+       Emoji icons are inline — no icon font/SVG needed.
+  ═══════════════════════════════════════════ -->
   <section class="services">
-    <div class="service">
-      <h3>Weddings</h3>
-      <p>Elegant storytelling</p>
-    </div>
-    <div class="service">
-      <h3>Portraits</h3>
-      <p>Authentic expression</p>
-    </div>
-    <div class="service">
-      <h3>Events</h3>
-      <p>Captured moments</p>
+    <span class="section-label">What We Offer</span>
+    <h2>Services</h2>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">📸</span>
+        <h3>Weddings</h3>
+        <p>Full-day coverage of your most important moments, from preparation to celebration.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🧑</span>
+        <h3>Portraits</h3>
+        <p>Personalized shoots designed to capture your personality and expression.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🎉</span>
+        <h3>Events</h3>
+        <p>Professional coverage for special occasions, ensuring no moment is missed.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🛍</span>
+        <h3>Commercial</h3>
+        <p>Clean and impactful visuals for brands, products, and promotions.</p>
+      </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+
+  <!-- ═══════════════════════════════════════════
+       7. PROCESS SECTION (NEW)
+       3 numbered steps with thin connector lines between them.
+       The .process-connector is a horizontal rule styled in CSS.
+       On mobile, connectors are hidden and steps stack vertically.
+       Step numbers use Cormorant Garamond in large size for elegance.
+  ═══════════════════════════════════════════ -->
+  <section class="process">
+    <span class="section-label">How It Works</span>
+    <h2>Our Process</h2>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <span class="step-number">01</span>
+        <h3>Plan</h3>
+        <p>We discuss your vision, style, and goals to create a tailored approach.</p>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step">
+        <span class="step-number">02</span>
+        <h3>Capture</h3>
+        <p>We execute the shoot with precision, creativity, and full attention to detail.</p>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step">
+        <span class="step-number">03</span>
+        <h3>Deliver</h3>
+        <p>You receive professionally edited, high-quality images ready to treasure.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       8. TESTIMONIALS SECTION (NEW)
+       3 short quotes. <blockquote> tags are semantically
+       correct for quoted text. <cite> is used for attribution.
+       Large quotation marks are CSS-generated via ::before on blockquote.
+       Grid collapses to 1-col on mobile.
+  ═══════════════════════════════════════════ -->
+  <section class="testimonials">
+    <span class="section-label">Kind Words</span>
+    <h2>Testimonials</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <blockquote>The photos exceeded our expectations. Every moment felt alive.</blockquote>
+        <cite>— Maria S.</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>Professional, creative, and easy to work with.</blockquote>
+        <cite>— James R.</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>Captured exactly what we wanted — and more.</blockquote>
+        <cite>— Claire & Tom</cite>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       9. CONTACT SECTION (Refined)
+       Now uses <ul> + <li> for structured contact info.
+       All 3 contact details are wrapped in <a> tags:
+         - mailto: → opens mail client
+         - tel:    → tap-to-call on mobile
+         - https:  → opens Instagram in a new tab
+       rel="noopener" on target="_blank" is a security best practice.
+  ═══════════════════════════════════════════ -->
   <section class="contact">
-    <p>Email: your@email.com</p>
-    <p>Phone: 0912-345-6789</p>
-    <p>Instagram: @acba.photography</p>
+    <span class="section-label">Reach Out</span>
+    <h2>Get in Touch</h2>
+    <p class="contact-intro">Let's work together to capture your next moment.</p>
+
+    <ul class="contact-list">
+      <li>
+        <span class="contact-label">Email</span>
+        <a href="mailto:acba@email.com">acba@email.com</a>
+      </li>
+      <li>
+        <span class="contact-label">Phone</span>
+        <a href="tel:+639123456789">0912-345-6789</a>
+      </li>
+      <li>
+        <span class="contact-label">Instagram</span>
+        <a href="https://instagram.com/acba.photography" target="_blank" rel="noopener">@acba.photography</a>
+      </li>
+    </ul>
   </section>
 
-  <!-- FOOTER -->
+
+  <!-- ═══════════════════════════════════════════
+       10. FOOTER
+       Two lines: copyright + rights reserved.
+       Low opacity (0.4) keeps it visually quiet.
+  ═══════════════════════════════════════════ -->
   <footer>
     <p>© 2026 AcbA Photography</p>
+    <p class="footer-sub">All rights reserved.</p>
   </footer>
 
 </body>
